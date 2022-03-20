@@ -4,32 +4,32 @@ import { motion } from "framer-motion";
 
 function Dashboard() {
   const [weather, setWeather] = useState({});
-  const [locations, setLocations] = useState("");
+  const [location, setLocation] = useState("");
   const [showError, setShowError] = useState("");
 
-  const ifClicked = () => {
-    if (locations !== "") {
+  const handleSearchClick = () => {
+    if (location !== "") {
       setShowError("");
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${locations}&appid=b0bb98585c51102d8cb63cdbeb983e64&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=b0bb98585c51102d8cb63cdbeb983e64&units=metric`
       )
-        .then((res) => {
-          if (res.ok) {
-            console.log(res);
-            return res.json();
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
           } else {
-            if (res.status === 404) {
+            if (response.status === 404) {
               setShowError("Please enter correct location.");
+              setWeather({});
             }
           }
         })
-        .then((object) => {
-          setWeather(object);
-          console.log(weather);
+        .then((obj) => {
+          setWeather(obj);
         })
         .catch((error) => console.log(error));
-    } else if (locations === "") {
+    } else if (location === "") {
       setShowError("Please enter location.");
+      setWeather({});
     }
   };
   return (
@@ -50,12 +50,12 @@ function Dashboard() {
             <div className="searchFlex">
               <input
                 type="text"
-                value={locations}
-                onChange={(e) => setLocations(e.target.value)}
-                placeholder="Enter Location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                placeholder="Please Enter Location"
                 className="location_input"
               />
-              <motion.button className="location_searcher" onClick={ifClicked}>
+              <motion.button className="location_searcher" onClick={handleSearchClick}>
                 Search  <i className="fa fa-search"></i>
               </motion.button>
             </div>
@@ -65,8 +65,8 @@ function Dashboard() {
               <></>
             )}
             {weather && weather?.sys?.country ? (
-              <div className="d-flex1">
-                <div className="flex-column1">
+              <div className="flexBlock">
+                <div className="flexBlockStart">
                   <label className="currTemp">
                     {weather?.main?.temp + " °C"}
                   </label>
@@ -77,34 +77,34 @@ function Dashboard() {
                     {weather?.weather && weather?.weather[0].main}
                   </label>
                 </div>
-                <div className="flex-column2">
+                <div className="flexBlockEnd">
                   <div className="infoDiv">
                     <label className="labelBold">Humidity: </label>
-                    <label className="temp">
+                    <label className="infoLabel">
                       {weather?.main?.humidity + "%"}
                     </label>
                   </div>
                   <div className="infoDiv">
                     <label className="labelBold">Pressure: </label>
-                    <label className="temp">
+                    <label className="infoLabel">
                       {weather?.main?.pressure + " mbar"}
                     </label>
                   </div>
                   <div className="infoDiv">
                     <label className="labelBold">Wind Speed: </label>
-                    <label className="temp">
+                    <label className="infoLabel">
                       {weather?.wind?.speed + " km/h"}
                     </label>
                   </div>
                   <div className="infoDiv">
                     <label className="labelBold">Current Temparature: </label>
-                    <label className="temp">
+                    <label className="infoLabel">
                       {weather?.main?.temp + " °C"}
                     </label>
                   </div>
                   {weather?.sys?.country.toUpperCase() ==='IN' ? <div className="infoDiv">
                     <label className="labelBold">Time: </label>
-                    <label className="temp">
+                    <label className="infoLabel">
                       {" " +
                         moment().format("dddd") +
                         ", " +
