@@ -1,0 +1,124 @@
+.app {
+  height: 100vh;
+  width: 100vw;
+  background-color: aqua;
+  font-family: 'Rubik', sans-serif;
+}
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.AppName {
+  color: indigo;
+  font-size: 27px;
+  font-weight: 700;
+  margin-left: 1em;
+}
+.wrapper {
+  padding: 2em;
+  border-radius: 11px;
+  width: 50%;
+  min-height: 100px;
+  background: white;
+  border: 2px solid black;
+}
+
+.app__image {
+  margin: 24px;
+  max-height: 500px;
+  width: auto;
+  border-radius: 10px;
+}
+.location_searcher {
+  padding: 0.5em;
+  color: white;
+  background-color: indigo;
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+}
+@media only screen and (max-width: 670px) {
+  .location_searcher {
+    margin-top: 0.5em;
+  }
+}
+.location_input {
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #333;
+  border-radius: 5px;
+  border-color: grey;
+  font-size: 15px;
+  outline: none;
+}
+.currTemp {
+  font-size: 25px;
+  margin: 0.25em 0;
+  font-weight:600;
+}
+.searchFlex {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1em;
+}
+.temp {
+  color: indigo;
+  font-weight: 500;
+}
+.locName {
+  font-size: 23px;
+  font-weight: 600;
+  color: indigo;
+  margin-bottom: 0.25em;
+}
+.weatherTemp {
+  font-size: 18px;
+  font-weight: 500;
+}
+.labelBold {
+  font-size: 16px;
+  font-weight: 600;
+}
+.infoDiv {
+  margin-bottom: 0.5em;
+}
+.d-flex1 {
+  display: flex;
+  flex-direction: row;
+}
+.flex-column1 {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  margin-top: 1em;
+  margin-left: 5%;
+}
+.flex-column2 {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  margin-top: 1.5em;
+}
+.errorMsg {
+  color: red;
+  margin-top: 2em;
+  font-size: 15px; 
+  display: flex;
+  justify-content: center;
+}
+h1 { display:inline-block; }
+h1:after {
+  display:block;
+  content: '';
+  border-bottom: solid 3px black;  
+  transform: scaleX(0);  
+  transition: transform 250ms ease-in-out;
+}
+h1:hover:after { transform: scaleX(1); }
+h1.fromRight:after{ transform-origin:100% 50%; }
+h1.fromLeft:after{  transform-origin:  0% 50%; }
