@@ -11,7 +11,7 @@ function Dashboard() {
     if (location !== "") {
       setShowError("");
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=b0bb98585c51102d8cb63cdbeb983e64&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid={appId}}&units=metric`
       )
         .then((response) => {
           if (response.ok) {
