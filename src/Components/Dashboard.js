@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import moment from "moment";
 import { motion } from "framer-motion";
 
 function Dashboard() {
@@ -11,7 +10,7 @@ function Dashboard() {
     if (location !== "") {
       setShowError("");
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid={appId}}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=b0bb98585c51102d8cb63cdbeb983e64&units=metric`
       )
         .then((response) => {
           if (response.ok) {
@@ -56,7 +55,7 @@ function Dashboard() {
                 className="location_input"
               />
               <motion.button className="location_searcher" onClick={handleSearchClick}>
-                Search  <i className="fa fa-search"></i>
+                Search &nbsp;<i className="fa fa-search"></i>
               </motion.button>
             </div>
             {showError !== "" ? (
@@ -76,6 +75,18 @@ function Dashboard() {
                   <label className="weatherTemp">
                     {weather?.weather && weather?.weather[0].main}
                   </label>
+                  <div className="infoDiv">
+                    <label className="labelBold">Latitude: </label>
+                    <label className="infoLabel">
+                      {weather?.coord.lat}
+                    </label>
+                  </div>
+                  <div className="infoDiv">
+                    <label className="labelBold">Longitude: </label>
+                    <label className="infoLabel">
+                      {weather?.coord.lon}
+                    </label>
+                  </div>
                 </div>
                 <div className="flexBlockEnd">
                   <div className="infoDiv">
@@ -102,17 +113,18 @@ function Dashboard() {
                       {weather?.main?.temp + " °C"}
                     </label>
                   </div>
-                  {weather?.sys?.country.toUpperCase() ==='IN' ? <div className="infoDiv">
-                    <label className="labelBold">Time: </label>
+                  <div className="infoDiv">
+                    <label className="labelBold">Max Temparature: </label>
                     <label className="infoLabel">
-                      {" " +
-                        moment().format("dddd") +
-                        ", " +
-                        moment().format("LL") +
-                        ", " +
-                        moment().format("LTS")}
+                      {weather?.main?.temp_max+2 + " °C"}
                     </label>
-                  </div>:<></>}
+                  </div>
+                  <div className="infoDiv">
+                    <label className="labelBold">Min Temparature: </label>
+                    <label className="infoLabel">
+                      {weather?.main?.temp_min-2 + " °C"}
+                    </label>
+                  </div>
                 </div>
               </div>
             ) : (
